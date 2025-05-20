@@ -2,3 +2,7 @@ numpy
 pyyaml
 gymnasium
 matplotlib
+torch
+pygame
+pyglet
+tensorflow
