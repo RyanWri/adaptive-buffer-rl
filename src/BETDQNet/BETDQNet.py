@@ -14,7 +14,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.nn.functional as F
 from torch.autograd import Variable
-from prioritized_memory import Memory
+from src.BETDQNet.prioritized_memory import Memory
 
 """ Training Parameters """
 EPISODES = 250
@@ -54,7 +54,7 @@ to search for the prioritized samples by means of the proposed BETDQNet prioriti
 """
 
 class DQNAgent():
-    def __init__(self, state_size, action_size):
+    def __init__(self, state_size, action_size, hyper_params_cfg):
         self.render = False
         self.load_model = False
 
@@ -63,15 +63,15 @@ class DQNAgent():
         self.action_size = action_size
 
         """ training hyperparameters """
-        self.discount_factor = DISCOUNT
-        self.learning_rate = LEARNING_RATE
-        self.memory_size = MEMORY_SIZE
-        self.epsilon = EPSILON_START
-        self.epsilon_min = EPSILON_END
-        self.explore_step = EPSILON_DECAY_PERIOD
+        self.discount_factor = hyper_params_cfg["discount_factor"]
+        self.learning_rate = hyper_params_cfg["learning_rate"]
+        self.memory_size = hyper_params_cfg["memory_size"]
+        self.epsilon = hyper_params_cfg["epsilon_start"]
+        self.epsilon_min = hyper_params_cfg["epsilon_end"]
+        self.explore_step = hyper_params_cfg["epsilon_decay_period"]
         self.epsilon_decay = (self.epsilon - self.epsilon_min) / self.explore_step
-        self.batch_size = BATCH_SIZE
-        self.train_start = TRAIN_START
+        self.batch_size = hyper_params_cfg["batch_size"]
+        self.train_start = hyper_params_cfg["train_start"]
 
         """ W1 is assigned to the TD error and W2 to the BE """
         self.w1 = W1
@@ -177,14 +177,11 @@ class DQNAgent():
         self.optimizer.step()
 
 
-if __name__ == "__main__":
-
-    env = gym.make('CartPole-v1', render_mode="rgb_array")
-
+def run_BETDQNet(env, hyper_params_cfg, cfg):
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
     model = DQN(state_size, action_size)
-    agent = DQNAgent(state_size, action_size)
+    agent = DQNAgent(state_size, action_size, hyper_params_cfg)
 
     scores, episodes = [], []
     ep_rewards = []
@@ -194,12 +191,13 @@ if __name__ == "__main__":
     """
     Initialization of gradient-based weight-adjustment
     """
-    agent.w1 = 0.2
-    agent.w2 = 0.8
-    zeta = 2.2
-    lr = 0.001
+    agent.w1 = hyper_params_cfg["w1"]
+    agent.w2 = hyper_params_cfg["w2"]
+    zeta = hyper_params_cfg["zeta"]
+    lr = hyper_params_cfg["learning_rate"]
+
     try:
-        for e in range(EPISODES):
+        for e in range(hyper_params_cfg["episodes"]):
             print(f"Episode: {e}")
             done = False
             step = 0
@@ -249,5 +247,6 @@ if __name__ == "__main__":
     except Exception as e:
         print(e)
     finally:
-        print("Closing Environment.")
+        print("Closing Environment for BETDQNet.")
         env.close()
+    return ep_rewards

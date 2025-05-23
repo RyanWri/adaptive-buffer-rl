@@ -1,27 +1,9 @@
 import gymnasium as gym
 
 
-def make_env(cfg: dict, env_key: str):
-    envs_cfg = cfg.get("environments", {})
-    if not envs_cfg:
-        raise ValueError("No 'environments' section found in your config.")
-
-    if env_key not in envs_cfg:
-        available = ", ".join(envs_cfg.keys())
-        raise KeyError(
-            f"Environment '{env_key}' not defined in config. "
-            f"Available keys: {available}"
-        )
-
-    env_cfg = envs_cfg[env_key]
-    try:
-        env_name = env_cfg["env_name"]
-    except KeyError:
-        raise KeyError(f"Missing 'env_name' for environment '{env_key}'!")
-
-    kwargs = {k: v for k, v in env_cfg.items() if k != "env_name"}
+def make_env(cfg: dict, env_name: str):
+    kwargs = {k: v for k, v in cfg.items() if k != "env_name"}
     return gym.make(env_name, **kwargs)
-
 
 def make_multiple_envs(cfg: dict) -> dict:
     envs_cfg = cfg.get("environments")

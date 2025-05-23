@@ -11,13 +11,14 @@ environments:
   acrobot:
     env_name: "Acrobot-v1"
 
-# Maybe it should work the same way as environments (support multiple rather than a single one)?
-agent:
-  # "standard" → usual replay buffer DQN
-  # "adaptive" → adaptive-buffer variant
-  variant: "adaptive"
+## Maybe it should work the same way as environments (support multiple rather than a single one)?
+#agent:
+#  # "standard" → usual replay buffer DQN
+#  # "adaptive" → adaptive-buffer variant
+#  variant: "adaptive"
 
-  parameters:
-    learning_rate: 0.1
-    batch_size: 64
-    gamma: 0.9
+parameters:
+  learning_rate: 0.1
+  batch_size: 64
+  gamma: 0.9
+  episodes: 250
