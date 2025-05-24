@@ -2,10 +2,32 @@ import gymnasium as gym
 
 
 def make_env(cfg: dict, env_name: str):
+    """
+    Creates a Gymnasium environment.
+
+    Params:
+        :cfg: The environment config
+        :env_name: The name of the desired gymnasium environment.
+
+    Returns:
+        A gymnasium environment with the desired configurations.
+    """
     kwargs = {k: v for k, v in cfg.items() if k != "env_name"}
     return gym.make(env_name, **kwargs)
 
 def make_multiple_envs(cfg: dict) -> dict:
+    """
+    Creates a list of Gymnasium environments.
+
+    Params:
+        :cfg: The config from config.yaml file.
+
+    raises ValueError if the environment config is not a dictionary or if the config.yaml file is missing 'environments'.
+    raises KeyError if the 'env_name' field is missing from the environment's config.
+
+    Returns:
+        A list of gymnasium environments with the desired configurations.
+    """
     envs_cfg = cfg.get("environments")
     if not isinstance(envs_cfg, dict):
         raise ValueError(

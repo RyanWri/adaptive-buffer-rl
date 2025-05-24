@@ -153,10 +153,15 @@ def train(env_name="CartPole-v1", episodes=250, max_steps=200):
 
 def run_VanillaDQN(env, hyper_params_cfg: dict, env_cfg: dict):
     """
-    Exactly the same signature as run_BETDQN:
-      - env:      a gym.Env from your factory
-      - hyper_params_cfg: the dict you built in main.py
-      - env_cfg:  the per‐environment section of your YAML
+    Run the VanillaDQN.
+
+    Params:
+        env: a gymnasium env from env_factory
+        hyper_params_cfg: the dict of the hyperparameters (default in main or can be changed from config.yaml).
+        env_cfg: the per‐environment config from config.yaml.
+
+    Returns:
+        A list of total reward per episode.
     """
     episodes = hyper_params_cfg["episodes"]
     max_steps = hyper_params_cfg.get("max_steps", env_cfg.get("max_steps", 200))

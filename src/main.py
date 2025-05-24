@@ -60,8 +60,8 @@ if __name__ == "__main__":
         # Run the VanillaDQN on the current environment.
         vanillaDQN_rewards = run_VanillaDQN(env, hyper_params, env_cfg)
 
-        plot_reward_over_episodes(betdqnet_rewards, "BETDQNet")
-        plot_reward_over_episodes(vanillaDQN_rewards, "VanillaDQN")
+        plot_reward_over_episodes(betdqnet_rewards, "BETDQNet", window=5)
+        plot_reward_over_episodes(vanillaDQN_rewards, "VanillaDQN", window=5)
 
 
 

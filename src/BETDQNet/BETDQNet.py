@@ -177,7 +177,7 @@ class DQNAgent():
         self.optimizer.step()
 
 
-def run_BETDQNet(env, hyper_params_cfg, cfg):
+def run_BETDQNet(env, hyper_params_cfg, env_cfg):
     state_size = env.observation_space.shape[0]
     action_size = env.action_space.n
     model = DQN(state_size, action_size)
@@ -197,7 +197,7 @@ def run_BETDQNet(env, hyper_params_cfg, cfg):
     lr = hyper_params_cfg["learning_rate"]
 
     try:
-        for e in range(hyper_params_cfg["episodes"]):
+        for e in range(env_cfg["episodes"]):
             print(f"Episode: {e}")
             done = False
             step = 0
