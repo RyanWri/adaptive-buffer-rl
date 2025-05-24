@@ -4,12 +4,15 @@ environments:
   # Example of additional parameter for CartPole Environment - render_mode: "rgb_array"
   cartpole:
     env_name: "CartPole-v1"
+    episodes: 250
 
   mountaincar:
     env_name: "MountainCar-v0"
+    episodes: 250
 
   acrobot:
     env_name: "Acrobot-v1"
+    episodes: 500
 
 ## Maybe it should work the same way as environments (support multiple rather than a single one)?
 #agent:
@@ -21,4 +24,3 @@ parameters:
   learning_rate: 0.1
   batch_size: 64
   gamma: 0.9
-  episodes: 250
