@@ -16,18 +16,18 @@ def moving_average(data, window=100):
     return np.convolve(data, np.ones(window)/window, mode='valid')
 
 
-def plot_reward_over_episodes(reward_list, algorithm, window=200):
+def plot_reward_over_episodes(reward_list, algorithm, window):
     """
     Plots the smoothed episode reward over time for a given reinforcement learning algorithm.
 
     Params:
         :reward_list: A list of episodic rewards collected during training.
         :algorithm: The name of the algorithm being evaluated (used in the plot title).
-        :window: The window size for the moving average filter (default is 100).
+        :window: The window size for the moving average filter.
     """
-    # smoothed = moving_average(reward_list, window)
+    smoothed = moving_average(reward_list, window)
     plt.figure(figsize=(10, 5))
-    plt.plot(reward_list)
+    plt.plot(smoothed)
     plt.xlabel("Episode")
     plt.ylabel(f"Average Reward (window={window})")
     plt.title(f"Smoothed Episode Reward Over Time - {algorithm}")
