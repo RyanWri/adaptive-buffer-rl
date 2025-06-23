@@ -9,7 +9,7 @@ Includes configurable training pipelines, enhanced buffer prioritization, and en
 
 ---
 
-## 🧠 Key Idea
+## Key Idea
 
 Traditional DQN agents sample past experiences from a replay buffer uniformly or with fixed priority based on TD error. This project implements an **adaptive buffer mechanism** that:
 
