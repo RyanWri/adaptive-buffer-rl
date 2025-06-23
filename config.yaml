@@ -4,15 +4,15 @@ environments:
   # Example of additional parameter for CartPole Environment - render_mode: "rgb_array"
   cartpole:
     env_name: "CartPole-v1"
-    episodes: 250
+    episodes: 200
 
-  mountaincar:
-    env_name: "MountainCar-v0"
-    episodes: 250
-
-  acrobot:
-    env_name: "Acrobot-v1"
-    episodes: 500
+#  mountaincar:
+#    env_name: "MountainCar-v0"
+#    episodes: 250
+#
+#  acrobot:
+#    env_name: "Acrobot-v1"
+#    episodes: 500
 
 parameters:
   learning_rate: 0.1

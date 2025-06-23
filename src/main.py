@@ -2,10 +2,9 @@ from src.environment.env_fatory import *
 from src.config.configHandler import load_config
 from src.BETDQNet.BETDQNet import run_BETDQNet
 from src.BETDQNet.VanillaDQN import run_VanillaDQN
-from src.visualization.visualization_handler import plot_reward_over_episodes
+from src.visualization.visualization_handler import plot_reward_over_episodes, plot_side_by_side
 
-hyper_params = {"episodes": 250,
-                "batch_size": 64,
+hyper_params = {"batch_size": 64,
                 "gamma": 0.99,
                 "discount_factor": 0.99,
                 "learning_rate": 0.001,
@@ -62,7 +61,4 @@ if __name__ == "__main__":
 
         plot_reward_over_episodes(betdqnet_rewards, "BETDQNet", window=5)
         plot_reward_over_episodes(vanillaDQN_rewards, "VanillaDQN", window=5)
-
-
-
-
+        plot_side_by_side(env_name, betdqnet_rewards, vanillaDQN_rewards, window=25)

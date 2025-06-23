@@ -12,8 +12,9 @@ def make_env(cfg: dict, env_name: str):
     Returns:
         A gymnasium environment with the desired configurations.
     """
-    kwargs = {k: v for k, v in cfg.items() if k != "env_name"}
+    kwargs = {k: v for k, v in cfg.items() if k != "env_name" and k != "episodes"}
     return gym.make(env_name, **kwargs)
+
 
 def make_multiple_envs(cfg: dict) -> dict:
     """
@@ -43,6 +44,6 @@ def make_multiple_envs(cfg: dict) -> dict:
             raise KeyError(f"Environment '{key}' is missing required 'env_name' field")
 
         name = env_cfg["env_name"]
-        params = {k: v for k, v in env_cfg.items() if k != "env_name"}
+        params = {k: v for k, v in env_cfg.items() if k != "env_name" and k != "episodes"}
         envs[key] = gym.make(name, **params)
     return envs

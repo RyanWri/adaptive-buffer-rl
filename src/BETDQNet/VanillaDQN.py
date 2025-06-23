@@ -163,7 +163,7 @@ def run_VanillaDQN(env, hyper_params_cfg: dict, env_cfg: dict):
     Returns:
         A list of total reward per episode.
     """
-    episodes = hyper_params_cfg["episodes"]
+    episodes = env_cfg["episodes"]
     max_steps = hyper_params_cfg.get("max_steps", env_cfg.get("max_steps", 200))
 
     # pull in all the common hyperparams
