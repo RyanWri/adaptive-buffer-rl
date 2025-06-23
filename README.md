@@ -79,4 +79,5 @@ parameters:
 
 ## Architecture of the Adaptive Replay Method
 The diagram below illustrates the architecture of the adaptive prioritized replay mechanism introduced in the project. Unlike standard DQN, this method computes a weighted score for each experience in the replay buffer by combining Temporal Difference (TD) error and Bellman Error. The weights are dynamically updated using a gradient-based optimization strategy to balance exploration and exploitation during training. This prioritization guides which transitions are sampled, allowing the agent to learn more efficiently from meaningful experiences.
+
 ![An image displaying the architecture of the adaptive replay method used in this project](images/APER_Architecture.png)
